@@ -156,14 +156,14 @@ defmodule Schemata.Query do
         raise CassandraError, [
           query: Queryable.statement(query),
           keyspace: Queryable.keyspace(query),
-          message: "CQErl processing error: #{reason}",
+          message: "CQErl processing error: #{inspect(reason)}",
           stack: stacktrace
         ]
       {:error, {:throw, {reason, stacktrace}}} ->
         raise CassandraError, [
           query: Queryable.statement(query),
           keyspace: Queryable.keyspace(query),
-          message: "CQErl processing error: #{reason}",
+          message: "CQErl processing error: #{inspect(reason)}",
           stack: stacktrace
         ]
       {:error, {code, msg, _extras}} ->
