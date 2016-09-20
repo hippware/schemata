@@ -2,7 +2,7 @@
   "certifi": {:hex, :certifi, "0.4.0", "a7966efb868b179023618d29a407548f70c52466bf1849b9e8ebd0e34b7ea11f", [:rebar3], []},
   "combine": {:hex, :combine, "0.9.1", "5fd778ee77032ae593bf79aedb8519d9e36283e4f869abd98c2d6029ca476db8", [:mix], []},
   "coverex": {:hex, :coverex, "1.4.10", "f6b68f95b3d51d04571a09dd2071c980e8398a38cf663db22b903ecad1083d51", [:mix], [{:httpoison, "~> 0.9", [hex: :httpoison, optional: false]}, {:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}]},
-  "cqerl": {:git, "https://github.com/hippware/cqerl.git", "0072eedfa1d62f7dec3f8bf7b6dc14ac6e8ac1dc", [branch: "working-2.0"]},
+  "cqerl": {:git, "https://github.com/hippware/cqerl.git", "11c46056b3d6fd65acb9642311e4ad679ba9fa6d", [branch: "working-2.0"]},
   "credo": {:hex, :credo, "0.4.8", "1e71a4c21a4bead4911498d3e0f72a90f500075cf132c3ad8976b5a474b4c594", [:mix], [{:bunt, "~> 0.1.6", [hex: :bunt, optional: false]}]},
   "dialyxir": {:hex, :dialyxir, "0.3.5", "eaba092549e044c76f83165978979f60110dc58dd5b92fd952bf2312f64e9b14", [:mix], []},
   "dogma": {:hex, :dogma, "0.1.7", "927f76a89a809db96e0983b922fc899f601352690aefa123529b8aa0c45123b2", [:mix], [{:poison, ">= 1.0.0", [hex: :poison, optional: false]}]},
