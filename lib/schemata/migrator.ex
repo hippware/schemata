@@ -44,6 +44,11 @@ defmodule Schemata.Migrator do
     GenServer.call(Migrator, {:migrate, dir, n})
   end
 
+  @spec reset :: :ok
+  def reset do
+    GenServer.call(Migrator, :reset)
+  end
+
 
   # -------------------------------------------------------------------------
   # GenServer callbacks
@@ -108,6 +113,11 @@ defmodule Schemata.Migrator do
       |> merge_migrations(state.migrations)
 
     {:reply, result, %State{state | migrations: migrations}}
+  end
+
+  def handle_call(:reset, _from, state) do
+    :ok = truncate table: "#{state.keyspace}.#{state.table}"
+    {:reply, :ok, state}
   end
 
 
