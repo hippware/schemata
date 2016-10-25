@@ -41,7 +41,7 @@ defmodule Schemata.Migrator do
   @spec migrate(:up | :down, pos_integer) ::
     {:ok, :applied | :already_applied} | {:error, term}
   def migrate(dir, n \\ 1) do
-    GenServer.call(Migrator, {:migrate, dir, n})
+    GenServer.call(Migrator, {:migrate, dir, n}, 60_000)
   end
 
   @spec reset :: :ok
