@@ -72,7 +72,7 @@ defmodule Schemata.Query.AlterTable do
     defp render_op(column, :drop),           do: "DROP #{column}"
 
     defp render_type({collection, type}), do: "#{collection}<#{type}>"
-    defp render_type(type), do: "#{type}"
+    defp render_type(type), do: to_string(type)
 
     def values(_struct), do: %{}
     def keyspace(struct), do: struct.in

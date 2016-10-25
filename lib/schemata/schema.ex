@@ -89,12 +89,12 @@ defmodule Schemata.Schema do
 
   @spec ensure_keyspace(Query.keyspace) :: :ok | {:error, term}
   def ensure_keyspace(keyspace) do
-    GenServer.call(SchemaServer, {:ensure_keyspace, keyspace}, 60000)
+    GenServer.call(SchemaServer, {:ensure_keyspace, keyspace}, 60_000)
   end
 
   @spec create_keyspace(Query.keyspace) :: :ok | {:error, term}
   def create_keyspace(keyspace) do
-    GenServer.call(SchemaServer, {:create_keyspace, keyspace}, 60000)
+    GenServer.call(SchemaServer, {:create_keyspace, keyspace}, 60_000)
   end
 
   @spec ensure_table(Query.keyspace, Query.table) :: :ok | {:error, term}
