@@ -52,7 +52,7 @@ defmodule Schemata.Mixfile do
 
   defp deps do
     [
-      {:dialyxir, "~> 0.3", only: :dev},
+      {:dialyxir, github: "jeremyjh/dialyxir", branch: "develop", only: :dev},
       {:dogma,    "~> 0.1", only: :dev},
       {:credo,    "~> 0.4", only: :dev},
       {:ex_guard, "~> 1.1", only: :dev},

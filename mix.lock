@@ -4,7 +4,7 @@
   "coverex": {:hex, :coverex, "1.4.10", "f6b68f95b3d51d04571a09dd2071c980e8398a38cf663db22b903ecad1083d51", [:mix], [{:httpoison, "~> 0.9", [hex: :httpoison, optional: false]}, {:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}]},
   "cqerl": {:git, "https://github.com/hippware/cqerl.git", "11c46056b3d6fd65acb9642311e4ad679ba9fa6d", [branch: "working-2.0"]},
   "credo": {:hex, :credo, "0.4.13", "0e9d0479c7e0591e36b093bf17fbdde012e2a69b5571e2df8d0b75b4fc8adc74", [:mix], [{:bunt, "~> 0.1.6", [hex: :bunt, optional: false]}]},
-  "dialyxir": {:hex, :dialyxir, "0.3.5", "eaba092549e044c76f83165978979f60110dc58dd5b92fd952bf2312f64e9b14", [:mix], []},
+  "dialyxir": {:git, "https://github.com/jeremyjh/dialyxir.git", "dbba8594be2b1e439153c2beaa1f1269a292e5b0", [branch: "develop"]},
   "dogma": {:hex, :dogma, "0.1.11", "40a148b556f2f5f5ceb4d1ee673813cfd3e64bb90c0da9cb24386b37576b11cf", [:mix], [{:poison, ">= 2.0.0", [hex: :poison, optional: false]}]},
   "erlando": {:git, "https://github.com/rabbitmq/erlando.git", "1c1ef25a9bc228671b32b4a6ee30c7525314b1fd", [branch: "master"]},
   "erlang_murmurhash": {:git, "https://github.com/hippware/erlang-murmurhash.git", "73fe63aad252c9d503c889935f30370995026403", [branch: "master"]},
