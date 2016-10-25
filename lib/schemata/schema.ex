@@ -97,6 +97,11 @@ defmodule Schemata.Schema do
     GenServer.call(SchemaServer, {:create_keyspace, keyspace}, 60_000)
   end
 
+  @spec reset_keyspace(Query.keyspace) :: :ok | {:error, term}
+  def reset_keyspace(keyspace) do
+    GenServer.call(SchemaServer, {:reset_keyspace, keyspace}, 60_000)
+  end
+
   @spec ensure_table(Query.keyspace, Query.table) :: :ok | {:error, term}
   def ensure_table(keyspace, table) do
     GenServer.call(SchemaServer, {:ensure_table, keyspace, to_atom(table)})
@@ -164,6 +169,11 @@ defmodule Schemata.Schema do
       |> each_table(keyspace, &create_table(keyspace, &1, state))
 
     {:reply, result, state}
+  end
+
+  def handle_call({:reset_keyspace, keyspace}, _from, state) do
+    :ok = Schemata.drop :keyspace, named: keyspace
+    :ok = Schemata.create_keyspace keyspace
   end
 
   def handle_call({:ensure_table, keyspace, table}, _from, state) do
