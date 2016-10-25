@@ -174,6 +174,7 @@ defmodule Schemata.Schema do
   def handle_call({:reset_keyspace, keyspace}, _from, state) do
     :ok = Schemata.drop :keyspace, named: keyspace
     :ok = Schemata.create_keyspace keyspace
+    {:reply, :ok, state}
   end
 
   def handle_call({:ensure_table, keyspace, table}, _from, state) do
