@@ -97,7 +97,7 @@ defmodule Schemata.Schema do
     GenServer.call(SchemaServer, {:create_keyspace, keyspace}, 60_000)
   end
 
-  @spec reset_keyspace(Query.keyspace) :: :ok | {:error, term}
+  @spec reset_keyspace(Query.keyspace) :: :ok
   def reset_keyspace(keyspace) do
     GenServer.call(SchemaServer, {:reset_keyspace, keyspace}, 60_000)
   end
