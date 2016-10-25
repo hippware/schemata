@@ -18,15 +18,30 @@ defmodule Schemata.App do
   ]
 
   def start(_type, _args) do
-    configure_cqerl
-
-    _ =
-      :schemata
-      |> Application.fetch_env!(:cluster)
-      |> configure_db
-
+    :ok = configure_cqerl
+    :ok = get_cluster |> configure_db
     Schemata.Supervisor.start_link()
   end
+
+  @spec get_cluster :: Keyword.t
+  def get_cluster do
+    cluster = Application.fetch_env!(:schemata, :cluster)
+    Keyword.merge(@cluster_defaults, cluster)
+  end
+
+  @spec get_keyspace(atom) :: {:ok, Keyword.t} | {:error, :unknown_keyspace}
+  def get_keyspace(ks) do
+    Enum.reduce_while(
+      get_cluster[:keyspaces],
+      {:error, :unknown_keyspace},
+      fn ^ks, _ -> {:halt, {:ok, ks_config([])}}
+         {^ks, config}, _ -> {:halt, {:ok, ks_config(config)}}
+         _, acc -> {:cont, acc}
+      end
+    )
+  end
+
+  defp ks_config(config), do: Keyword.merge(@keyspace_defaults, config)
 
   defp configure_cqerl do
     # Set a few things that we depend on in cqerl
@@ -37,7 +52,6 @@ defmodule Schemata.App do
 
   defp configure_db(cluster) do
     :ok = Logger.debug("Starting cqerl clients")
-    cluster = Keyword.merge(@cluster_defaults, cluster)
     {hosts, opts} = extract_defaults(cluster)
     _ = start_default_client(hosts, opts)
     _ = start_keyspace_clients(hosts, opts, cluster[:keyspaces])
@@ -64,9 +78,9 @@ defmodule Schemata.App do
 
   defp start_keyspace_client(hosts, opts, {name, config}) do
     :ok = Logger.debug("Starting client for keyspace #{name}")
-    config = Keyword.merge(@keyspace_defaults, config)
-    ensure_keyspace!(name, config)
+    config = ks_config(config)
 
+    ensure_keyspace!(name, config)
     opts = Keyword.put(opts, :keyspace, name)
     CQErl.add_group(hosts, opts, config[:clients])
   end
