@@ -170,12 +170,21 @@ defmodule Schemata do
   """
   @spec create_keyspace(Query.keyspace, Keyword.t) :: :ok
   def create_keyspace(name, query \\ []) do
-    query
+    name
+    |> keyspace_config(query)
     |> Keyword.put(:named, name)
     |> Schemata.Query.CreateKeyspace.from_opts
     |> Query.run!
     |> ignore_result
   end
+
+  defp keyspace_config(name, []) do
+    case Schemata.App.get_keyspace(name) do
+      {:error, :unknown_keyspace} -> []
+      {:ok, config} -> config
+    end
+  end
+  defp keyspace_config(_name, config), do: config
 
   @doc """
   Creates a table.
