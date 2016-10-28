@@ -220,7 +220,16 @@ defmodule Schemata.Queryable.CreateTableSpec do
        %CreateTable{ct | columns: [id: {:list, :int}]}},
       {"CREATE TABLE IF NOT EXISTS test_tbl" <>
        " (id map<int,int>, PRIMARY KEY (id))",
-       %CreateTable{ct | columns: [id: {:map, :int, :int}]}}
+       %CreateTable{ct | columns: [id: {:map, :int, :int}]}},
+      {"CREATE TABLE IF NOT EXISTS test_tbl (id uuid, PRIMARY KEY (id))" <>
+       " WITH CLUSTERING ORDER BY (id ASC)",
+       %CreateTable{ct | order_by: :id}},
+      {"CREATE TABLE IF NOT EXISTS test_tbl (id uuid, PRIMARY KEY (id))" <>
+       " WITH CLUSTERING ORDER BY (id DESC)",
+       %CreateTable{ct | order_by: [id: :desc]}},
+      {"CREATE TABLE IF NOT EXISTS test_tbl (id uuid, PRIMARY KEY (id))" <>
+       " WITH CLUSTERING ORDER BY (first DESC, second ASC)",
+       %CreateTable{ct | order_by: [first: :desc, second: :asc]}}
     ]}
   end
 

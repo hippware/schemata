@@ -110,8 +110,13 @@ defmodule Schemata.Query.Helper do
   def sorting_option_string([]), do: ""
   def sorting_option_string(field) when is_atom(field),
     do: sorting_option_string([{field, :asc}])
-  def sorting_option_string([{field, dir}]) do
-    " WITH CLUSTERING ORDER BY (#{field} #{dir |> to_string |> String.upcase})"
+  def sorting_option_string([{_, _} | _] = list) do
+    cols = list |> Enum.map(&order_col/1) |> Enum.join(", ")
+    " WITH CLUSTERING ORDER BY (#{cols})"
+  end
+
+  defp order_col({field, dir}) do
+    "#{field} #{dir |> to_string |> String.upcase}"
   end
 
   @doc false
