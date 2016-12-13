@@ -121,7 +121,9 @@ defmodule Schemata.Query.Helper do
 
   @doc false
   def view_pk_conditions(pk) when not is_list(pk), do: view_pk_conditions([pk])
-  def view_pk_conditions([first | rest]) do
+  def view_pk_conditions(pk), do: view_pk_conditions_impl(List.flatten(pk))
+
+  def view_pk_conditions_impl([first | rest]) do
     List.foldl(rest, "WHERE #{first} IS NOT NULL",
      fn (name, str) -> "#{str} AND #{name} IS NOT NULL" end)
   end
