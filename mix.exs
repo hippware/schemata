@@ -21,8 +21,8 @@ defmodule Schemata.Mixfile do
          "-Wunknown"
        ]
      ],
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   def application do
@@ -53,14 +53,14 @@ defmodule Schemata.Mixfile do
   defp deps do
     [
       {:dialyxir, github: "jeremyjh/dialyxir", branch: "develop", only: :dev},
-      {:dogma,    "~> 0.1", only: :dev},
-      {:credo,    "~> 0.4", only: :dev},
+      {:dogma,    "~> 0.1.13", only: :dev},
+      {:credo,    "~> 0.5.3", only: :dev},
       {:ex_guard, "~> 1.1", only: :dev},
-      {:reprise,  "~> 0.5", only: :dev},
-      {:espec,    "~> 1.0", only: :test},
+      {:reprise,  "~> 0.5.0", only: :dev},
+      {:espec,    "~> 1.2", only: :test},
       {:coverex,  "~> 1.4", only: :test},
-      {:timex,    "~> 3.0"},
-      {:inflex,   "~> 1.7"},
+      {:timex,    "~> 3.1"},
+      {:inflex,   "~> 1.8"},
       {:happy,    "~> 1.3"},
 
       {:cqerl, [

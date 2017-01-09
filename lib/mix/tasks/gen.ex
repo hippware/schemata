@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Schemata.Gen do
   import Mix.Schemata
 
   def run([title]) do
-    create_directory migrations_path
+    create_directory migrations_path()
 
     now = Timex.now
 
@@ -37,7 +37,7 @@ defmodule Mix.Tasks.Schemata.Gen do
     end
     """
     filename = "#{Timex.format!(now, "%Y%m%d%H%M%S", :strftime)}_#{title}.exs"
-    filepath = Path.join(migrations_path, filename)
+    filepath = Path.join(migrations_path(), filename)
 
     create_file(filepath, template)
   end

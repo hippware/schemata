@@ -18,8 +18,8 @@ defmodule Schemata.App do
   ]
 
   def start(_type, _args) do
-    :ok = configure_cqerl
-    :ok = get_cluster |> configure_db
+    :ok = configure_cqerl()
+    :ok = get_cluster() |> configure_db()
     Schemata.Supervisor.start_link()
   end
 
@@ -32,7 +32,7 @@ defmodule Schemata.App do
   @spec get_keyspace(atom) :: {:ok, Keyword.t} | {:error, :unknown_keyspace}
   def get_keyspace(ks) do
     Enum.reduce_while(
-      get_cluster[:keyspaces],
+      get_cluster()[:keyspaces],
       {:error, :unknown_keyspace},
       fn ^ks, _ -> {:halt, {:ok, ks_config([])}}
          {^ks, config}, _ -> {:halt, {:ok, ks_config(config)}}
