@@ -17,7 +17,7 @@ defmodule Mix.Schemata do
   end
 
   def migrate(dir) do
-    :ok = start_schemata
+    :ok = start_schemata()
     Migrator.migrate(dir)
   end
 end

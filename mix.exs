@@ -21,8 +21,8 @@ defmodule Schemata.Mixfile do
          "-Wunknown"
        ]
      ],
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   def application do

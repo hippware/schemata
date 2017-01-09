@@ -63,7 +63,7 @@ defmodule Schemata.Migration do
 
   def from_map(map) do
     map
-    |> Enum.into(defaults)
+    |> Enum.into(defaults())
     |> Map.put(:__struct__, __MODULE__)
   end
 
